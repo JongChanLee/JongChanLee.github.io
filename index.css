@@ -1,0 +1,55 @@
+body {
+    background-image: url(image/background.jpg);
+    background-size: cover;
+}
+
+a{
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#header {
+    padding-top: 2rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+#header .avatar {
+    /*border: 1px solid gray;*/
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.1);
+    /*나중에 이걸 사용한다(백그라운드의 색을 주었을 때 이걸 넣자.)*/
+    border-radius: 100%;
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+#header .avatar img {
+    border-radius: 100%;
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+}
+
+#header ul {
+    padding: 0;
+}
+
+#header ul li {
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    border-radius: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#header ul li:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+#header ul li a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}

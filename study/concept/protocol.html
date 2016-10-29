@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>컴퓨터 네트워크의 계층 모델과 프로토콜</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    a {
+      font-size: 20px;
+    }
+
+    li a {
+      font-size: 16px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="concept_list.html">목록으로</a>
+
+  <hr> 이번 글은 'TCP/IP 쉽게, 더 쉽게 - 리브로웍스 지음/신상재 옮김 (제이펍)' 라는 책을 보고 공부한 내용을 정리 해놓은 것이다. 네트워크 쪽에 대한 지식은 3G, LTE, wifi 밖에 모르는 필자는 이 책을 보고 네트워크와 관련된 용어들의 개념을 알았다. 이번 글에 포함되어 있는 그림들은 내가 직접 만든 것이지만, 책에 똑같이 있음을 말한다. 때문에 혹여 문제가 된다면 필자에게 연락을 주기를 바란다. 또한 나처럼 네트워크에 대한
+  지식이 아예 없는 사람은 이 책을 볼 것을 추천한다. 이 글에는 책에 있는 모든 내용이 들어있지 않다. 필자가 개인적으로도 기억하기 쉽도록 간단하게만 적어놓았다.
+  <hr>
+
+  <ul>
+
+    <li>
+      <h2>컴퓨터 네트워크의 계층 모델</h2>
+      <p>
+        컴퓨터 통신에 참여하는 여러 장비나 프로그램의 역할들을 쉽게 이해하기 위해 분류하고 추상화 한 것을 계층 모델이라고 한다. 계층 모델은 아래의 그림과 같이 되어 있다.
+        <br><img src="image/protocol/protocol1.PNG" alt="" />
+        <br>위의 계층 모델은 TCP/IP 계층 모델이며, 이보다 더 세분화 된 OSI 참조 모델이라는 것이 존재한다.
+        <br>각각의 계층은 역할이 있으며 각 역할에 대한 내용은 위의 그림에 간단하게 나와있다.
+        <br>통신을 하는 두 컴퓨터의 모습을 간단하게 보자면 아래의 그림과 같다.
+        <br><img src="image/protocol/protocol2.PNG" alt="" />
+        <br>발신지에서는 애플리케이션 계층의 데이터를 차례로 다음 계층으로 전달하여 수신지로 보낸다.
+        <br>수신지에서는 받은 데이터를 네트워크 인터페이스 계층에서부터 차례로 전달하며 수신지의 어플리케이션 계층에 있는 프로그램으로 데이터를 보낸다.
+        <br>네트워크는 데이터를 패킷(Packet) 이라는 작은 단위로 분할하여 보낸다. 패킷들은 수신지에서 다시 하나의 데이터로 합쳐진 다음 애플리케이션 계층으로 이동한다.
+        <br>또한 각각의 패킷에는 트랜스포트 계층, 인터넷 계층, 네트워크 인터페이스 계층에서 발신지와 수신지의 정보를 담은 헤더라는 것을 덧붙여서 수신지로 보낸다.
+        <br><img src="image/protocol/protocol3.PNG" alt="" />
+        <br>이렇게 헤더에 발신지와 수신지의 정보를 담고 있기 때문에 데이터는 수신지로 보낼수가 있다.
+      </p>
+    </li>
+
+    <li>
+      <h2>프로토콜(Protocol)</h2>
+      <p>
+        프로토콜은 컴퓨터와 컴퓨터가 통신을 하기위해 정해놓은 규칙을 말한다. 헤더에 들어가는 정보의 종류, 구조, 순서 등을 정하는 것이다.(반드시 헤더가 아닐수도 있다.)
+        <br>여러가지 프로토콜이 있으며, 각각의 계층마다 사용하는 프로토콜이 존재한다.
+        <br><img src="image/protocol/protocol4.PNG" alt="" />
+        <br>네트워크와 관련된 여러가지를 보면 'TCP/IP' 라는 단어가 많이 나온다. 이 것은 하나의 프로토콜을 지칭하는 말이 아니라 인터넷에서 사용되는 각종 표준 프로토콜을 할데 모아 일컫는 말이라고 한다.
+        <br>흔히 TCP/IP라고 하는 것은 TCP와 IP가 프로토콜 중 가장 대표적이기 때문이라고 한다.
+        <br>인터넷 프로토콜 집합을 의미하는 단어가 필요하다면 TCP/IP 프로토콜 스위트(TCP/IP Protocol Suite) 또는 인터넷 프로토콜 스위트(Internet Protocol Suite)라고 하면된다.
+        <br>각 계층 별로 사용되는 프로토콜들에 대해서 간단하게 알아보자.
+        <ol>
+          <li>애플리케이션 계층
+            <ul>
+              <li>HTTP (Hyper Text Transfer Protocol)
+                <div>
+                  웹 브라우저와 웹 서버가 사용하는 프로토콜
+                  <br>크게 요청과 응답의 두 가지 형태로 구분된다.
+                  <br>웹 브라우저는 http 요청은 URL로 한다. 또한 웹 서버는 들어온 요청에 대한 처리의 결과에 따라 상태코드를 같이 보낸다.
+                  <br>200 OK - 요청이 성공했고 요청한 결과 데이터를 응답으로 보냈음, 404 Not Found - 요청한 내용을 찾을 수 없음 등이 있다.
+                </div>
+              </li>
+              <li>SMTP(Simple Mail Transfer Protocol)과 POP(Post Office Protocol)</li>
+              <div>
+                이메일에서 사용되는 프로토콜이다.
+                <br>이메일 발신자는 SMTP를 사용하여 수신자의 메일 서버로 메일을 보내고, 메일 수신자는 POP를 사용해서 메일 서버로부터 자신의 메일을 받아온다.
+              </div>
+              <li>IMAP(Interent Message Access Protocol)
+                <div>
+                  POP 프로토콜은 기본적으로 클라이언트가 메일을 수신하면 메일 서버에 보관하고 있었던 메일을 삭제하게 되어있다.
+                  <br>그래서 메일을 오랫동안 보관하려면 클라이언트 PC에 메일을 저장 공간을 확보해 두어야 한다.
+                  <br>하지만 이 방법은 공유가 되어 있지 않다면 다른 곳에서는 접근 할 수 없다는 단점이 있고 공간이 부족한 휴대기기에서는 적절하지 않다.
+                  <br>해서 POP을 보완한 프로토콜이 IMAP 이다.
+                  <br>IMAP은 클라이언트가 메일을 수신하더라도 메일 서버에서 수신한 메일을 지우지 않고 보관하도록 되어있다.
+                </div>
+              </li>
+              <li>SMB(Server Message Block)과 AFP(Apple Filing Protocol)
+                <div>
+                  파일 공유를 할 때 쓰는 프로토콜이다. 파일 공유 프로토콜은 OS마다 서로 다른데, 윈도우는 SMB, 맥 OS에서는 AFP를 사용한다.
+                </div>
+              </li>
+              <li>FTP(File Transfer Protocol)
+                <div>
+                  파일 전송 프로토콜이다.
+                  <br>LAN에서는 파일 공유와 같은 더 간단한 팡리 전송 방법이 있기 때문에 인터넷에 연결된 서버에 파일을 전송 할 때 사용한다.
+                  <br>웹 서버에 html 파일을 전송할 때는 FTP를 사용하고 이를 웹 브라우저의 요청에 따른 응답으로 처리 할 때는 HTTP를 사용한다.
+                </div>
+              </li>
+              <li>Telnet과 SSH(Secure Shell)
+                <div>
+                  원격지의 컴퓨터를 명령어로 제어하기 위한 프로토콜이다.
+                  <br>서버와 데이터 센터는 먼 곳에 설치되어 있는 경우가 많기 때문에 서버를 관리 할 때 사용한다.
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>트렌스포트 계층
+            <ul>
+              <li>TCP(Transmission Control Protocol)
+                <div>
+                  웹이나 이메일, FTP와 같이 <span style="font-weight: bold;">정확한 데이터 전달</span>이 필요한 통신에 사용된다.
+                  <br>TCP는 데이터 전송에 신뢰성을 더하기 위해 데이터를 세그먼트(segment)라는 단위로 분할하고, 전송 속도를 조정하며, 데이터의 재전송을 하는 등의 역할을 한다.
+                </div>
+              </li>
+              <li>UDP(User Datagram Protocol)
+                <div>
+                  VoIP나 동영상 스트리밍과 같이 데이터 전송의 신뢰성보다는 <span style="font-weight: bold">속도가 우선일 때</span>는 UDP를 사용한다.
+                  <br>통신 과정에서 데이터의 손실이 발생할 수 있기 때문에 일부 데이터가 누락거나 왜곡되더라도 큰 문제가 없는 서비스에서 사용한다.
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>인터넷 계층
+            <ul>
+              <li>IP
+                <div>
+                  IP는 네트워크 환경에서 컴퓨터의 위치를 나타내는 주소 역할을 한다.
+                  <br>주로 사람이 알아보기 쉬운 형태로 나타내기 위해 DNS를 이용하여 URL이라는 형태로 변환하여 사용한다.
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+        <hr>이 외에도 많은 프로토콜이 있으나, 전부 적기에는 양이 많기 때문에 이만 하도록 하겠다. 더 많은 정보가 필요하다면 책을 보는 것을 추천한다.
+      </p>
+    </li>
+  </ul>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <p>
+    최초 작성일 : 2016-10-29 (토요일)
+    <br>참고 자료
+    <ul>
+      <li>
+        <a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791185890678&orderClick=LAG&Kc=" target="_blank">TCP/IP 쉽게, 더 쉽게 - 리브로웍스 지음/신상재 옮김 (제이펍)</a>
+      </li>
+      <!--  링크와 어디꺼인지 표기-->
+      <!-- </ul>
+    <hr>수정내역
+      < 수정을 할경우 표기-->
+  </p>
+</body>
+
+</html>
