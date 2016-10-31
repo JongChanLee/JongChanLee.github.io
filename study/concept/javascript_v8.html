@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>자바스크립트와 v8엔진</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    header a {
+      font-size: 20px;
+    }
+
+    article {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    article a {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer a {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="concept_list.html">목록으로</a>
+  </header>
+
+  <section>
+    <ul>
+      <li>
+        <article>
+          <h2>JavaScript</h2>
+          <p>
+            위키피디아에서 '자바스크립트'를 검색해보면 어려운 용어들이 상당히 많다. 그 용어들부터 정리해보자.
+            <ol>
+              <li>스크립트 언어(Scripting Language)
+                <br>스크립트 언어는 응용 소프트웨어를 제어한다. 응용 프로그램과 독립하여 사용되고 일반적으로 응용프로그램의 언어와 다른 언어로 사용되어 최종사용자가 응용 프로그램의 동작을 사용자의 요구에 맞게 수행할 수 있도록 해준다.
+                <br>자바스크립트도 웹 브라우저라는 응용 소프트웨어 위에서 작동하지만 웹 브라우저를 만든 언어와는 분명히 다른 언어이다. </li>
+
+              <li>객체 기반 언어(프로토타입 기반 프로그래밍)
+                <br>객체 지향 프로그램의 한 형태의 갈래로 '클래스'가 없고. 클래스 기반 언어에서 상속을 사용하는 것과 다르게, 객체를 원형(프로토타입)으로 하여 복제의 과정을 통하여 객체의 동작 방식을 다시 사용할 수 있는 언어이다.
+                <br>클래스 기반 언어는 생성자를 통해서 인스턴스를 만드는 반면, 프로토타입 기반 언어는 원래 있던 객체를 복제(cloning)하여 새로운 객체를 만든다.
+                <br>또한 프로토타입 기반 언어로 작성된 프로그램은 프로그램의 run-time중에 프로토타입을 대체하기 쉬우나, 클래스 기반의 언어로 작성된 프로그램에서는 클래스를 바꿀 수 있는 언어가 몇가지 없다.
+                <br>자바스크립트는 프로토타입 기반의 프로그래밍 언어이다.</li>
+
+              <li>ECMA 스크립트
+                <br>ECMA 스크립트는 웹 상에서 널리 쓰이는 스크립트 언어 중 표준화된 언어를 말한다.
+                <br>'넷스케이프'에서 출시된 자바스크립트가 웹 페이지의 동작을 향상시키는 언어로서 성공하자, MS에서 이와 '적당히' 호환되는 J스크립트를 개발하고 IE 3.0에 포함하여 출시하였다.
+                <br>이에 넷스케이프는 표준화를 위해 자바스크립트 기술 규격을 'ECMA 인터네셔널'에 제출하였다. 또한 이 규격에 대한 작업은 ECMA-262라는 이름으로 작업되었고 현재 ECMA-262에 의해 표준화된 웹 상의 스크립트 언어가 ECMA스크립트이다.
+                <br>자바스크립트와 J스크립트는 이 ECMA스크립트와의 호환을 목표로 하면서, ECMA 규격에 포함되지 않은 확장 기능을 제공하고 있다. </li>
+            </ol>
+            <br> 자바스크립트는 위와 같은 용어들과 관련이 있다.
+            <br>자바스크립트와 자바의 구문이 유사한 점이 있는데, 이은 두 언어 모두 C 언어의 기본 구문을 바탕으로 했기 때문이라고 한다.
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>V8 자바스크립트 엔진</h2>
+          <p>
+            V8은 구글에서 개발된 JIT 형태의 자바스크립트 <a href="compiler.html" target="_blank">인터프리터 혹은 컴파일러</a>이다.
+            <br>구글의 Chrome V8 페이지를 보면 다음과 같은 특징들이 나와있다.
+            <ol>
+              <li>C++로 작성된 구글의 고성능 자바스크립트 엔진이다.</li>
+              <li>오픈 소스이다.</li>
+              <li>ECMA스크립트(ECMA-262 규격)으로 되어있다.</li>
+              <li>윈도우 XP 이상 버젼, Mac OS X 10.5 이상 버젼, 리눅스 시스템(IA-32, ARM, MIPS 프로세서를 사용하는)에서 실행될 수 있다.</li>
+              <li>독립적으로 사용가능 하며 C++ 프로그램의 일부로도 가능하다.</li>
+              <li>V8은 DOM을 지원한다. (기존의 자바스크립트 엔진은 지원하지 않으며 브라우저에서 제공하는 것을 사용했다.)</li>
+            </ol>
+          </p>
+        </article>
+      </li>
+    </ul>
+
+  </section>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <footer>
+    최초 작성일 : 2016-10-14 (금요일)
+    <br>참고 자료
+    <ul>
+      <li><a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8" target="_blank">자바스크립트 - 위키피디아</a></li>
+      <li><a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85_%EA%B8%B0%EB%B0%98_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">프토로타입 기반 프로그래밍 - 위키피디아</a></li>
+      <li><a href="https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%96%B8%EC%96%B4">스크립트 언어 - 위키피디아</a></li>
+      <li><a href="https://ko.wikipedia.org/wiki/ECMA%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8">ECMA스크립트 - 위키피디아</a></li>
+      <li><a href="https://ko.wikipedia.org/wiki/V8" target="_blank">V8 자바스크립트 엔진 - 위키피디아</a></li>
+      <li><a href="https://developers.google.com/v8/" target="_blank">Chrome V8 - Google</a></li>
+      <li><a href="http://huns.me/development/360" target="_blank">Interpreter and JavaScript Engine - Huns.me 블로그</a></li>
+      <!--  링크와 어디꺼인지 표기-->
+    </ul>
+    <hr>수정내역
+    <!--  수정을 할경우 표기-->
+    <ol>
+      <li>참고자료 수정 [2016-10-26(수요일)]</li>
+    </ol>
+  </footer>
+</body>
+
+</html>
