@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Ajax & CORS & SOP</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    header a {
+      font-size: 20px;
+    }
+
+    article {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    article a {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer a {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="concept_list.html">목록으로</a>
+  </header>
+
+  <section>
+    <ul>
+      <li>
+        <article>
+          <h2>AJAX(Asynchronous JavaScript and XML)</h2>
+          <p>
+            먼저 Ajax의 등장 배경에 대해서 알아보자.
+            <br>기존의 웹 어플리케이션은 사용자가 서버로 요청을 보내면, 서버가 요청에 대한 처리를 한 후(비즈니스 로직을 수행) 응답을 보내어 클라이언트에서 처리하는 방식이였다. 이때는 전체 페이지 중에서 일부 데이터만 업데이트하고 싶어도(예를 들어서 댓글이 달렸을 때 갱신하는 작업) 전체 페이지를 처음부터 로딩해야하는 방식으로 동작하였다. 그렇기 때문에 이 방식은 낭비가 많은 방식이였다.
+            <br><br>이러한 비효율적인 구조를 개선하려고 Microsoft가 처음 시도하였으며, 여러 과정을 거치면서 XMLHttpRequest(자바스크립트 코드 내부에서 사용 가능한 객체이다.)라는 것을 선보였다. 이 XMLHttpRequest를 사용하면 비동기 처리를 하여 웹페이지 전체가 아닌 일부분만을 갱신할 수 있게 되며, 이러한 것과 관련된 기술을 AJAX라고 한다.
+            <br>AJAX 기술은 자바스크립트 내부에서 XMLHttpRequest 객체를 사용하지만, 최근에 나오는 라이브러리들은 추상화된 좋은 인터페이스들이 나오기 때문에 XMLHttpRequest은 겉으로 들어나지 않는 다고 한다.
+            <div style="margin: 0 auto; width: 20%; border-top : 1px solid #000000;"></div>
+            여기서 잠깐 내가 이해하지 못했던 것을 설명하고 가겠다. 나는 처음 AJAX에 대해 들었을 때, 페이지 일부를 갱신하는 작업일 뿐인데 저게 왜 비동기 처리지? 라는 궁금증을 가지고 있었다.
+            <br>거기에 대한 답을 하자면 이렇다. 'Ajax는 동기, 비동기 처리 모두 된다.'(하지만 이름에 Asynchronous 라는 단어를 붙인 이유는 모르겠다.)
+            <br><br>동기 처리에 대한 예를 들어보자. 네이버나 티스토리에서 블로그 글을 보고 내가 거기에 댓글을 달면 페이지 전체가 로딩되는 것이 아닌 내가 새로 입력한 댓글만 들어가면서 그 부분만 갱신이 되는 경우를 동기 처리를 하는 AJAX라고 할 수 있겠다.
+            <br>이번엔 비동기 처리에 대한 예를 들어보자. 페이스북에서 동영상을 보고 있는데 밑에 댓글 부분이 갱신되는 것을 비동기 처리라고 할 수 있다. 동기 처리라면 동영상이 중간에 끊길 것이다. 하지만 비동기 처리이기 때문에 끊기지 않고 처리된다.
+            <div style="margin: 0 auto; width: 20%; border-top : 1px solid #000000;"></div>
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>SOP & 크로스 도메인</h2>
+          <p>
+            SOP(Same Origin Policy)는 자바스크립트가 같은 도메인 내에서만 작동하는 것을 원칙으로 한다는 내용으로 서로 다른 도메인에서 자바스크립트로 접근하려 했을 때, 또는 다른 서버에서 Ajax통신의 결과를 받는 행위를 하지 못하도록 하는 자바스크립트의 보안 정책 중 하나이다. 말로만 설명하려니 이해하기 어려우니 그림을 통해 이해해 보자.
+            <img src="image/Ajax_CORS_SOP/Ajax_CORS_SOP_01.PNG" alt="" />
+            <ol>
+              <li>클라이언트 측에서 example1.com으로 http 요청을 보낸다.(html, css, javascript 등)</li>
+              <li>example1.com에서 응답으로 받은 javascript 코드는 메인 도메인으로 example1.com을 등록한다.</li>
+              <li>또한 javascript 코드 안에는 Ajax를 이용하여 example2.com의 일부 데이터(요청에 의한)를 가져와서 페이지에 보여주는 코드가 삽입되어 있다.</li>
+              <li>하지만 이 자바스크립트 코드에는 이미 메인 도메인으로 example1.com이 등록되어 있으므로 example1.com에 속한 url로만 결과를 받을 수 있다.(이 AJAX 통신의 결과를 받을 때 자바스크립트는 보안상 접근을 거부한다.)</li>
+              <li>이를 크로스 도메인(Cross Domain) 또는 샌드박스(Sandbox)라고 한다.</li>
+            </ol>
+            정리하자면 웹 서비스를 개발하는 과정에 자바스크립트의 sop 정책을 위반하게 될 수 있는데 이를 크로스 도메인 이슈, 또는 샌드박스라고 한다.
+            <br><br>현재 크로스도메인 이슈를 해결할 수 있는 방법들이 여러가지 나와있다.
+            <ol>
+              <li>JSONP (Json with Padding)
+                <br>script태그가 동일 출처 정책의 제약을 받지 않는 특성을 이용해서 우회하는 방법이다. GET 메소드만 이용할 수 있다는 치명적인 단점이 있다.</li>
+              <li>Reverse Proxy
+                <br>동일 출처 정책은 브라우저 보안 정책이라는 것을 이용한 방법이다. 서버와 클라이언트 사이에 별도의 Proxy 서버를 두고 이 서버를 이용하여 요청을 주고 받는 방식이다. 별도의 서버를 구축해야하고 추가적인 네트워크 요청이 발생한다는 단점이 있다.</li>
+              <li>CORS(Cross Origin Resource Sharing)
+                <br>크로스 도메인 이슈를 해결하는 표준이 없을 때는 위의 방법들을 사용했는데, W3C에서 만든 크로스 도메인 이슈를 해결하는 표준이 바로 CORS이다.
+                <br>이 방법은 브라우저에서 서버측으로 자신이 메인 도메인이 아닌 다른 도메인으로 AJAX 요청등을 해도 되냐는 허락을 받기 위한 요청을 보내고, 서버측에서는 그에 대한 응답을 브라우저에 보낸후에 브라우저에서 AJAX 등의 크로스 도메인 이슈와 관련된 작업을 하는 것이다.
+                <br>서버에 허락을 받는 Request에도 종류가 있다. Simple Requests(기존의 데이터에 사이드 이펙트를 일으키지 않는 GET,HEAD,POST 요청을 보내는 것)와 Preflighted Requests(기존의 데이터에 사이드 이펙트를 만들 수 있는 다른 메소드들에 대한 요청)이 있다. 더 자세한 내용은 첨부한 참고자료를 보면 좋다.</li>
+            </ol>
+          </p>
+        </article>
+      </li>
+    </ul>
+
+  </section>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <footer>
+    최초 작성일 : 2016-11-15 (화요일)
+    <br>참고 자료
+    <ul>
+      <li><a href="http://huns.me/development/1291" target="_blank">Ajax & CORS Overview - 김훈민(김코딩)님 블로그</a></li>
+      <li><a href="http://ooz.co.kr/232" target="_blank">CORS 크로스 도메인 이슈 - 이러쿵저러쿵 블로그</a></li>
+      <!--  링크와 어디꺼인지 표기-->
+    </ul>
+  </footer>
+</body>
+
+</html>

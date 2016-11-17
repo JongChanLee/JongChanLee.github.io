@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>쿠키와 세션</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    header a {
+      font-size: 20px;
+    }
+
+    article {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    article a {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer a {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="concept_list.html">목록으로</a>
+  </header>
+
+  <section>
+    <ul>
+      <li>
+        <article>
+          <h2>등장 배경</h2>
+          <p>
+            먼저 쿠키와 세션이 왜 생겼는지 또는 어떤 목적을 가지고 있는지 알아봅시다. http 프로토콜은 Stateless 프로토콜 입니다. 즉, 이전 상태 정보를 저장하지 않는 다는 것이지요. 그렇기 때문에 서버에서는 같은 클라이언트에서 http 요청이 여러번 들어와도 이게 같은 클라이언트로부터 들어왔다는 것을 모릅니다. 또한 이전 상태 정보를 저장하지 않기 때문에 이전 상태 정보를 알아야만 처리 가능한 결과를 내어주지 못하게 됩니다.
+            <br><br> 또한 이전 상태 정보를 저장하지 않는 다는 것은 상당한 불편함을 야기할 수 있습니다. 예를 들어, [ID 저장], [로그인 유지], [오늘 하루 그만 보기] 등의 기능들을 처리 할 수 없습니다. 이러한 기능들을 처리하기 위해(이전 상태 정보를 저장하기 위해) 쿠키와 세션이 사용됩니다.
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>쿠키(Cookie)</h2>
+          <p>
+            <ul>
+              <li>쿠키란?
+                <ul>
+                  <li>쿠키는 클라이언트의 상태정보를 저장하는 것으로 <span style=" color: red;">사용자의 PC 내에 텍스트 파일의 형태로 저장</span>되며 웹브라우저에 의해 관리(기록/수정/삭제)된다.</li>
+                  <li>쿠키 파일 하나당 최대 크기는 4096byte이며, 하나의 도메인 당 20개까지 가능하며 총 300개까지만 저장할 수 있다. 300개가 넘어가면 오래된 것부터 삭제된다.</li>
+                  <li>쿠키에는 (키,값)으로 된 데이터셋이 있으며 이 데이터셋을 이용하여 상태 정보를 저장한다.</li>
+                  <li>쿠키에 저장된 데이터셋은 http 요청과 응답 과정에서 http 헤더 안에 포함되어 클라이언트와 서버 사이를 왔다갔다 한다.</li>
+                </ul>
+              </li>
+              <li>쿠키의 문제점
+                <ul>
+                  <li>쉽게 말해서 보안에 취약하다.</li>
+                </ul>
+              </li>
+              <li>쿠키를 이용한 상태 정보 유지 프로세스
+                <img src="image/cookie_session/cookie_session_01.PNG" alt="" />
+              </li>
+              <div style="border: 1px solid gray; margin: 20px auto; font-size:16px;">
+                여기서 잠깐 집고 넘어가야할게 있다. 위 그림을 보면 http 요청과 응답의 헤더안에 들어가는 내용을 필자는 '데이터셋'이라고 표현하였다. 그 이유는 필자는 쿠키는 '클라이언트 PC의 상태정보가 저장되는 공간'이라고 이해하였기 때문이다. 말이 좀 이상할 수는 있다. 이해가 잘 안되는 분들은 '데이터셋'이라고 표현되어있는 부분을 '쿠키'라고 바꿔서 읽어라.
+                <br><br>여러 블로그를 보니 보통 서버 측에서 setCookie 등의 메소드로 표현하는 것 같으며, 대부분이 사람들이 헤더 안에 들어가는 내용을 쿠키라고 표현하는 것 같았다. 하지만 필자는 이점을 구분해야한다고 생각하여 구분해놓았을 뿐이며 다른 사람들은 쿠키로 이해해도 되겠다.(필자가 아주 크게 착각하고 있다면 알려주길 바랍니다...흙)
+              </div>
+              <li>쿠키를 이용한 클라이언트의 식별
+                <img src="image/cookie_session/cookie_session_02.PNG" alt="" />
+                <ul>
+                  <li>서버에서 사용자ID, 로그인시간, IP등을 암호화한 구문을 (키이름=암호화된구문)의 데이터셋으로 생성한다. (예: state=ASKHDNxxu7432keedsa7jhklsadasdmslk )</li>
+                  <li>서버는 http 응답 헤더에 데이터셋을 집어넣어서 클라이언트에게 전달한다.</li>
+                  <li>클라이언트는 전달받은 데이터를 쿠키에 저장한다.</li>
+                  <li>클라이언트는 <span style="color:red;">매번</span> http 요청에 해당 데이터셋을 집어넣고 전달한다.</li>
+                  <li>서버는 로그인 상황을 검사하기 위해서 <span style="color:red;">매번</span> 데이터셋을 읽고, 정보를 해독하고 서버에 있는 사용자 정보와 비교하여 후작업을 처리한다.</li>
+                </ul>
+                <span style="color:red;">※쿠키를 이요해서 클라이언트를 식별하는 것이지 쿠키가 클라이언트를 식별해주는 것이 아니다.</span>
+              </li>
+            </ul>
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>세션(Session)</h2>
+          <p>
+            <ul>
+              <li>세션이란?
+                <ul>
+                  <li>쿠키의 위험성을 보완하기 위해서 클라이언트에 대응하는 <span style="color:red;">상태 정보를 서버에서 저장하는 장소</span>이다.</li>
+                  <li>클라이언트 하나당 하나의 세션이 주어지며, 서버에서는 클라이언트와 세션을 매칭하기 위한 세션ID(식별자, 중복되지 않아야한다.)를 클라이언트 측에 전달한다.</li>
+                  <li>클라이언트에서는 이 세션ID를 쿠키에 저장하는 것이 보편적이며, 이 경우 세션ID로 클라이언트를 유추하거나 특정할 수 없게해야 안전하다.(충분히 길게 만들고, ID 자체는 의미가 없는 값으로 구성한다.)</li>
+                </ul>
+              </li>
+              <li>세션을 이용한 상태 정보 유지 프로세스
+                <img src="image/cookie_session/cookie_session_03.PNG" alt="" /> 세션을 이용한 클라이언트의 식별은 세션ID를 사용하여 구분할 뿐인다. 위의 그림에서 바꿀 것이 없으므로 생략하도록 하자. 단, 세션을 이용한 클라이언트의 식별에서 주의해야할 점은 쿠키와 마찬가지고 <span style="color:red;">세션이 클라이언트를 식별해주는 것이 아닌 세션을 이용하여 클라이언트를 식별하는 것</span>임을
+                잊지 말도록 하자.</li>
+              <li>세션 사용시 유의 사항
+                <ul>
+                  <li>세션을 사용할 때 세션ID를 클라이언트에 넘기고 클라이언트에서는 세션ID를 쿠키에 저장한다고 하였다. 하지만 간혹 쿠키를 저장하지 않는 브라우저가 있다고 한다.(브라우저가 쿠키를 사용하지 않는 건지 사용자가 쿠키를 저장하지 못하도록 설정한건지 모르겠다.) 브라우저가 쿠키를 저장하지 않기 때문에 상태유지를 못하는데 이때는 url에 세션ID를 포함시켜서 상태유지를 한다고 한다.</li>
+                </ul>
+              </li>
+            </ul>
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>마무리</h2>
+          <p>
+            쿠키나 세션 하나만 사용하지 않고 둘이 같이 사용하는 게 보통인 것 같다.(필자는 아직 웹서비스나 서버를 사용한 개발을 해본적이 없어서 잘 모르겠다.) 해킹당해도 별 문제 안되는 내용(오늘 하루 그만 보기, 오늘 본 상품 등)들은 쿠키에 저장하고 보안이 필요한 내용(아이디, 패스워드 등)은 서버에 저장하는 형태로 구성한다고 한다.
+            <br><br>마무리 이미지로 쿠키를 사용할 때와 세션을 사용할 때 클라이언트와 서버에는 어떠한 내용들이 저장되는지 정리된 그림으로 끝내도록하자.
+            <img src="image/cookie_session/cookie_session_04.PNG" alt="" /> 쿠키를 사용했을 때 서버측에 저장되는 내용은 없다. 사용자의 인증 같은 경우도 쿠키 안에 암호화 되어있는 것을 받아서 해석하여 구분할 뿐이다.
+
+            <br><br>추가로 참고자료에 hashcode 사이트의 출처가 있을 것이다. 필자가 쿠키와 세션을 이해하기 위해 올린 질문이며 엄청난 전문가께서 친절하게 답변해주신게 있으니 확인해보아도 좋을 것 같다.
+          </p>
+        </article>
+      </li>
+
+    </ul>
+
+  </section>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <footer>
+    최초 작성일 : 2016-11-17 (목요일)
+    <br>참고 자료
+    <ul>
+      <li><a href="https://ko.wikipedia.org/wiki/HTTP_%EC%BF%A0%ED%82%A4" target="_blank">쿠키 - 위키피디아</a></li>
+      <li><a href="http://hashcode.co.kr/questions/3243/%EC%BF%A0%ED%82%A4%EC%99%80-%EC%84%B8%EC%85%98%EC%97%90-%EA%B4%80%ED%95%9C-%EC%A7%88%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4" target="_blank">쿠키와 세션 질문 - hashcode</a></li>
+      <li><a href="http://www.jynote.net/263" target="_blank">쿠키란? - 하늘과 나의 IT이야기 블로그</a></li>
+      <li><a href="http://soul0.tistory.com/106" target="_blank">쿠키란? 그리고 세션이란? - 돌이의 서버이야기 블로그</a></li>
+      <li><a href="http://sinun.tistory.com/98" target="_blank">쿠키란 무엇인가? - PHR34K님의 블로그</a></li>
+      <li><a href="http://egloos.zum.com/mt1716/v/9791233" target="_blank">Session이 생성되고 관리되는 과정 - mt1716님의 블로그</a></li>
+      <li><a href="http://crynut84.tistory.com/74" target="_blank">쿠키와 세션 - 맨날맑음님의 블로그</a></li>
+      <li><a href="http://88240.tistory.com/190" target="_blank">Session이란? - shaking님의 블로그</a></li>
+    </ul>
+  </footer>
+</body>
+
+</html>
