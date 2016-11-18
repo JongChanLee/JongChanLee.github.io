@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>동기와 비동기</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    header a {
+      font-size: 20px;
+    }
+
+    article {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    article a {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer a {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="concept_list.html">목록으로</a>
+  </header>
+
+  <section>
+    <ul>
+      <li>
+        <article>
+          <h2>동기(Synchronous)</h2>
+          <p>
+            현실에서 동기는 동시에 일어난다는 뜻을 가지고 있거나 같게 맞춘다 라는 뜻을 가지고 있다.(필자는 그러한 뜻으로 사용한다. 핸드폰 주소록 동기화 등등)
+            <br>하지만 컴퓨터에게 동기란 현실에서의 동기와 약간 다르다. 컴퓨터에서 동기란 자신이 하던일을 누군가에게 위임하고 그 일에 대한 처리가 끝날 때 까지 기다리고 있는 것이다. 이해가 안될수 있으니 그림을 보자.
+            <img src="image/synchronous_asynchronous/synchronous_asynchronous_01.PNG" alt="" />
+            <ol>
+              <li>일단 상황을 설명하겠다. 주인공은 A이다.(동기 비동기는 단순히 Thread에서만 사용되는게 아니라서 그냥 A,B로만 표현하였다.) A가 처리해야할 일이 1,2,3이 있다. 이 중에서 1은 처리하던 도중 B에게 위임하여 처리해야하는 부분이 존재한다.</li>
+              <li>먼저 A는 1을 처리한다. 하지만 중간에 자신이 처리할 수 없거나 다른 이유로 인해 1의 중간 처리 과정을 B에게 위임한다.</li>
+              <li>1의 처리를 요청받은 B는 1의 처리를 하기 시작한다. 이때 A는 B가 처리 결과를 내어줄 때까지 다른작업은 하지 않고 기다린다.</li>
+              <li>B에서 처리가 끝난 결과를 A에게 가져다 주면 A는 1의 나머지 처리를 시작하고 1의 처리를 완전히 끝낸다.</li>
+              <li>1이 끝났으니 2를 시작하고 2가 끝나면 3을 시작한다.</li>
+            </ol>
+            <br> 딱 보아도 비효율적이다. 남에게 다른 일을 위임했으면 자신은 다른 일을 시작하면 되는 것이 아닌가? 하지만 동기 작업은 그렇지가 않다. 구글링을 해보면 동기에 대해서 이렇게 설명을 해놓은 블로그들이 조금 있다. '요청과 그 결과가 동시에 일어난다는 약속' 이라고 말이다. 하지만 나는 개인적으로 저말은 약간 이상하다고 생각한다. 위임한 일이 오래걸린 후에 받으면 '동시에' 라는 말은 맞지 않기 때문이다. 하지만 그렇다고
+            뭔가 딱 떠오르는 설명 문구는 없다.... <span style="text-decoration: line-through;">췌체</span>...
+
+            <br><br>동기의 핵심만 기억하자. [요청하고 기다린다. 기다리는 동안 다른 일은 할 수 없다.]
+            <br>이러한 동기의 장점은 설계가 간단하고 직관적이라는 점을 들을 수 있다. 하지만 단점은 계속 말하는 대로 결과가 올 때까지 다른일을 하지 못한다는 것이다.
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>비동기(Asynchronous)</h2>
+          <p>
+            비동기는 동기의 반대이다. 요청을 하고 기다리긴 기다리나 다른 일을 할 수 있는 것이다. 역시 그림으로 보자.
+            <img src="image/synchronous_asynchronous/synchronous_asynchronous_02.PNG" alt="" />
+            <ol>
+              <li>상황은 동기를 설명할 때와 같다.</li>
+              <li>역시나 A가 1을 처리하다가 B에게 일을 위임한다.</li>
+              <li>B는 위임 받은 일을 처리하고 그와 동시에 A는 2를 처리한다.</li>
+              <li>1을 끝낸 B는 A에게 그 결과를 전달하고, 결과를 받은 A는 1의 남은 일을 처리한다.</li>
+              <li>A는 남아있는 3을 처리한다.</li>
+            </ol>
+            <br>이러한 순서이다. 언뜻봐도 동기보다는 효율적인 것 같다. 하지만 위의 그림은 필자가 약간 어중간하게 만들었다.
+            <br>무슨 뜻이냐 하면 B로부터의 결과가 A가 2를 처리하는 도중에 온다면 A에서는 어떻게 처리해야할까? 위의 그림은 A가 2의 처리를 끝내고 기적과 같은 타이밍에 B로부터 결과를 받았다는 가정을 한 그림이다. 그렇다면 A가 2를 처리하던 도중에 B로 부터 결과를 받았을 때의 처리 과정을 알아보자.
+            <br>두가지 경우가 있다.
+            <ol>
+              <li>결과를 어딘가에 저장해놓고 2를 마저 끝내고 1을 처리한다.</li>
+              <img src="image/synchronous_asynchronous/synchronous_asynchronous_03.PNG" alt="" />
+              <li>2는 중간에 멈추고 1을 먼저 다 끝내고 다시 2를 시작하여 처리한다.</li>
+              <img src="image/synchronous_asynchronous/synchronous_asynchronous_04.PNG" alt="" />
+            </ol>
+            위와 같은 상황에서는 각 일에 대한 우선순위에 따라서 결정된다.
+            <br><br>또다른 상황을 보자.
+            <img src="image/synchronous_asynchronous/synchronous_asynchronous_05.PNG" alt="" /> 위의 상황은 이렇다. A가 일 1,2,3을 각각 B,C,D에게 위임한 것이다. 그런데 돌아오는 결과의 순서는 알 수가 없다. 비동기에서는 요청한 일의 순서에 따라서 결과가 오는 것이 아니다. 그냥 먼저 처리가 끝난 순서로 오는 것이다.
+            <br>비동기의 성격은 이렇기 때문에 일처리의 순서가 중요하지 않을 때 사용하면 좋다.
+          </p>
+        </article>
+      </li>
+
+    </ul>
+
+  </section>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <footer>
+    최초 작성일 : 2016-11-18 (금요일)
+    <br>참고 자료
+    <ul>
+      <li><a href="https://opentutorials.org/course/2136/11884" target="_blank">동기와 비동기 - 생활코딩</a></li>
+      <li><a href="http://twinbraid.blogspot.kr/2015/02/blog-post_2.html" target="_blank">동기와 비동기 개념 - Blue Water 블로그</a></li>
+      <!--  링크와 어디꺼인지 표기-->
+    </ul>
+  </footer>
+</body>
+
+</html>
