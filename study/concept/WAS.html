@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>웹 서버와 웹 어플리케이션 서버</title>
+  <style type="text/css">
+    body {
+      width: 80%;
+      margin: 2% auto;
+    }
+
+    header a {
+      font-size: 20px;
+    }
+
+    article {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    article a {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer a {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="concept_list.html">목록으로</a>
+  </header>
+
+  <section>
+    <ul>
+      <li>
+        <article>
+          <h2>웹 서버</h2>
+          <p>
+            웹 서버는 http요청에 대한 응답으로 정적인 웹페이지를 반환해주는 서버를 말한다. 그렇다면 정적인 웹페이지라는 것은 뭘까? 정적인 웹페이지는 사용자의 입력 등으로 인해 html 문서의 내용이 바뀌지 않는 웹페이지를 말한다. 지금 나의 이 페이지를 보고 있다면 이 웹페이지는 정적인 웹페이지이다. 댓글을 쓸 수 있는 공간이 없을 뿐더러 내가 저장해놓은 문서 그대로를 보여주기만 하기 때문이다. 정적인 웹페이지는 그런 것을 가리킨다.
+            <br><br>웹서버는 이렇게 사용자의 입력 또는 다른 요인들에 의해 실시간으로 바뀌는 웹페이지를 생성하는 것이 아닌, 있는 그대로의 문서만을 보내주는 서버를 말한다.
+            <br><br>대표적인 예로 '아파치 서버'가 있다.
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>웹 어플리케이션 서버</h2>
+          <p>
+            Web Application Server(WAS라고 한다.)는 웹 서버와 반대로 동적인 웹페이지를 반환해주는 서버를 말한다. 동적인 웹페이지는 정적인 웹페이지와 반대로 실시간으로 사용자의 입력 등의 요인에 따라 변하는 웹페이지를 말한다.
+            <br><br>네이버 검색창에 검색한 키워드에 따라 검색 결과가 바뀌는 것이 동적인 웹페이지이다.
+            <br><br>WAS 안에는 웹 서버와 함께 동적인 데이터의 처리를 해주는 웹 컨테이너가 들어간다.(Web Container)
+            <img src="image/WAS/WAS_01.PNG" alt=""> 위 그림에서 웹 어플리케이션 서버 안에 있는 웹 서버가 클라이언트의 요청을 받으면 동적인 데이터의 처리에 대한 처리를 웹 컨테이너에게 요청한다. 웹 컨테이너는 동적인 데이터를 처리한 후 그 결과를 웹 서버에게 돌려준다. 웹서버는 이를가지고 최종 html파일을 만들어서 클라이언트에서 응답해준다.
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>아파치와 톰캣</h2>
+          <p>
+            <ul>
+              <li>아파치(Apach) 서버</li>
+              아파치 서버는 아파치 재단에서 후원하고 있는 오픈 소스 프로젝트 커뮤니티에서 만든 http 웹 서버를 지칭하는 말이다.
+              <br> 대부분의 운영체제에서 실행될 수 있으며, 가장 널리 쓰인다.
+              <li>톰캣(Tomcat)</li>
+              톰캣은 마찬가지로 아파치 재단의 프로젝트 중 하나이며, 웹 어플리케이션 서버로서 자바 서블릿을 실행시키고 JSP 코드가 포함되어 있는 웹페이지를 만들어준다. 즉 톰캣은 웹 어플리케이션 서버이며 java로 되어있는 서버만 돌릴 수 있다.
+            </ul>
+          </p>
+        </article>
+      </li>
+
+      <li>
+        <article>
+          <h2>서버 정리?</h2>
+          <p>
+            웹 서비스를 만든다고해서 아파치 라던지 다른 여러 웹서버 또는 웹 어플리케이션 서버를 사용할 필요가 없다. 개발하려는 서버측의 언어와 프레임워크에 따라서 서버에 대한 처리를 알아서 해주는 것도 있습니다.
+            <br>예를 들어서 node.js 를 사용하여 웹 서비스를 만들거나 Spring 프레임워크를 사용해서 만들면 톰캣과 같은 웹 어플리케이션 서버가 따로 필요가 없다. 프레임워크에서 서버에 대한 처리를 알아서 해주기 때문이다.(http 요청에 대한 처리)
+          </p>
+        </article>
+      </li>
+    </ul>
+
+  </section>
+
+  <br>
+  <div style="border-bottom: 2px solid black;"></div>
+  <footer>
+    최초 작성일 : 2016-11-22 (화요일)
+    <br>참고 자료
+    <ul>
+      <li> <a href="http://sungbine.github.io/tech/post/2015/02/15/tomcat%EA%B3%BC%20apache%EC%9D%98%20%EC%97%B0%EB%8F%99.html" target="_blank">was와 웹서버의 차이 - 성빈님의 블로그</a> </li>
+      <li> <a href="http://gap85.tistory.com/45" target="_blank">WAS와 웹서버의 차이 - Joo Studio 블로그</a> </li>
+      <li><a href="http://m.blog.daum.net/palranggoblin/206" target="_blank">tomcat과 apache 차이 - 팔랑도깨비님의 블로그</a></li>
+      <li><a href="http://bsnippet.tistory.com/47" target="_blank">웹 서버와 웹 어플리케이션 서버 - Snippet</a></li>
+    </ul>
+  </footer>
+</body>
+
+</html>
