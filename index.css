@@ -1,19 +1,57 @@
+nav, body {
+    padding: 0;
+    margin: 0;
+}
+
 body {
+    font-family: 'Open Sans', sans-serif;
     background-image: url(image/background.jpg);
     background-size: cover;
 }
 
-a{
-  color: rgba(255, 255, 255, 0.7);
+a {
+    color: rgba(255, 255, 255, 0.7);
 }
 
-#header {
+nav {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.25);
+    display: flex;
+}
+
+nav .pg-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+nav .nav {
+    padding-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 9;
+}
+
+nav .nav a {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0px 20px;
+}
+
+
+/*header*/
+
+header {
+    width: 100%;
     padding-top: 2rem;
     text-align: center;
     flex-direction: column;
 }
 
-#header .avatar {
+header .avatar {
     /*border: 1px solid gray;*/
     border: 1px solid rgba(255, 255, 255, 0.25);
     background-color: rgba(255, 255, 255, 0.1);
@@ -23,7 +61,7 @@ a{
     padding: 0.5rem;
 }
 
-#header .avatar img {
+header .avatar img {
     border-radius: 100%;
     width: 170px;
     height: 170px;
@@ -31,11 +69,11 @@ a{
     display: block;
 }
 
-#header ul {
+header ul {
     padding: 0;
 }
 
-#header ul li {
+header ul li {
     width: 2rem;
     height: 2rem;
     display: inline-flex;
@@ -45,11 +83,65 @@ a{
     align-items: center;
 }
 
-#header ul li:hover {
+header ul li:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-#header ul li a {
+header ul li a {
     color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
+}
+
+/*section*/
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+section h2 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+section #about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+section #about p {
+  margin: 0;
+}
+
+section #tech-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+section #tech-stack .stack-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
+section #tech-stack .stack-item {
+  margin: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
+  /*나중에 이걸 사용한다(백그라운드의 색을 주었을 때 이걸 넣자.)*/
+  border-radius: 100%;
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+section #tech-stack .stack-item img {
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;;;
+  display: block;
 }
